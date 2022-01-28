@@ -30,6 +30,7 @@ const FeedbackForm = ({ handleAdd }) => {
 
     if (text.trim().length > 10) {
       handleAdd({ text, rating })
+      setText('')
     }
   }
 
@@ -44,6 +45,7 @@ const FeedbackForm = ({ handleAdd }) => {
           <input
             type='text'
             placeholder='Write a review'
+            value={text}
             onChange={handleTextChange}
           />
           <Button type='submit' isDisabled={btnDisabled}>
