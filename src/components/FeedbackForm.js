@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import RatingSelect from './RatingSelect'
 import Card from './shared/Card'
 import Button from './shared/Button'
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ handleAdd }) => {
   const [text, setText] = useState('')
   const [rating, setRating] = useState(10)
   const [btnDisabled, setBtnDisabled] = useState(true)
@@ -24,9 +25,17 @@ const FeedbackForm = () => {
     setText(e.target.value)
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    if (text.trim().length > 10) {
+      handleAdd({ text, rating })
+    }
+  }
+
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
 
         <RatingSelect select={rate => setRating(rate)} />
@@ -46,6 +55,10 @@ const FeedbackForm = () => {
       </form>
     </Card>
   )
+}
+
+FeedbackForm.propTypes = {
+  handleAdd: PropTypes.func.isRequired,
 }
 
 export default FeedbackForm
