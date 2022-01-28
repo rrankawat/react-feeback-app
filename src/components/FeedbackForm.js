@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Card from './shared/Card'
+import Button from './shared/Button'
 
 const FeedbackForm = () => {
   const [text, setText] = useState('')
@@ -16,7 +17,7 @@ const FeedbackForm = () => {
             placeholder='Write a review'
             onChange={e => setText(e.target.value)}
           />
-          <button type='submit'>Send</button>
+          <Button type='submit'>Send</Button>
         </div>
       </form>
     </Card>
