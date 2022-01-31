@@ -5,7 +5,8 @@ import Button from './shared/Button'
 import FeedbackContext from '../context/FeedbackContext'
 
 const FeedbackForm = () => {
-  const { addFeedback, feedbackEdit } = useContext(FeedbackContext)
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext)
 
   const [text, setText] = useState('')
   const [rating, setRating] = useState(10)
@@ -39,7 +40,11 @@ const FeedbackForm = () => {
     e.preventDefault()
 
     if (text.trim().length > 10) {
-      addFeedback({ text, rating })
+      if (feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, { text, rating })
+      } else {
+        addFeedback({ text, rating })
+      }
       setText('')
     }
   }
